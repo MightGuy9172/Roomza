@@ -1,0 +1,47 @@
+# =========================
+# Node / Express
+# =========================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+logs/
+*.log
+
+# =========================
+# Environment variables
+# =========================
+.env
+.env.*
+
+
+# =========================
+# OS / Editor junk
+# =========================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+# =========================
+# Build / Cache
+# =========================
+dist/
+build/
+.cache/
+.tmp/
+.temp/
+coverage/
+
+# =========================
+# Runtime uploads (if any)
+# =========================
+public/uploads/
+uploads/
+
+
+dump/
+backup/
+*.bak

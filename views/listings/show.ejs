@@ -1,0 +1,164 @@
+<% layout("/layouts/boilerplate") %>
+
+    <div class="container my-5">
+
+        <!-- TOP SECTION -->
+        <div class="row g-5 align-items-center">
+
+            <!-- IMAGE -->
+            <div class="col-lg-6">
+                <div class="image-wrapper shadow-sm rounded-4 overflow-hidden">
+                    <img src="<%= listing.image.url %>" class="img-fluid listing-img"
+                        onerror="this.src='https://via.placeholder.com/800x500?text=No+Image'">
+                </div>
+            </div>
+
+            <!-- DETAILS -->
+            <div class="col-lg-6">
+                <div class="bg-white p-4 rounded-4 shadow-sm">
+
+                    <h1 class="fw-bold mb-2">
+                        <%= listing.title %>
+                    </h1>
+
+                    <h4 class="fw-bold mb-4 text-primary fs-5">
+                        - Owned By <%= listing.owner.username %>
+                    </h4>
+
+
+                    <p class="text-muted mb-3">
+                        <i class="fa-solid fa-location-dot text-primary"></i>
+                        <%= listing.location %>, <%= listing.country %>
+                    </p>
+
+                    <p class="mb-4">
+                        <%= listing.description %>
+                    </p>
+
+                    <div class="price-box mb-4">
+                        ₹ <%= listing.price.toLocaleString("en-IN") %>
+                            <span class="fs-6 text-muted"> / night</span>
+                    </div>
+
+                    <% if(currentUser && currentUser._id.equals(listing.owner._id)) { %>
+                        <div class="d-flex gap-3 flex-wrap">
+                            <a href="/listings/<%= listing._id %>/edit" class="btn btn-outline-primary px-4">
+                                <i class="fa-solid fa-pen"></i> Edit
+                            </a>
+
+                            <form action="/listings/<%= listing._id %>?_method=DELETE" method="POST">
+                                <button class="btn btn-outline-danger px-4">
+                                    <i class="fa-solid fa-trash"></i> Delete
+                                </button>
+                            </form>
+                        </div>
+                        <% } %>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- LEAVE REVIEW -->
+        <% if(currentUser ) { %>
+            <div class="my-5">
+                <div class="bg-white p-4 rounded-4 shadow-sm">
+
+                    <h3 class="fw-bold mb-4">Leave a Review</h3>
+
+                    <form action="/listings/<%= listing._id %>/reviews" method="POST" class="needs-validation"
+                        novalidate>
+
+                        <!-- RATING SLIDER -->
+                        <div class="mb-4">
+                            <!-- Starability -->
+                            <fieldset class="starability-slot">
+                                <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1"
+                                    checked aria-label="No rating." />
+                                <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+                                <label for="first-rate1" title="Terrible">1 star</label>
+                                <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+                                <label for="first-rate2" title="Not good">2 stars</label>
+                                <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+                                <label for="first-rate3" title="Average">3 stars</label>
+                                <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+                                <label for="first-rate4" title="Very good">4 stars</label>
+                                <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+                                <label for="first-rate5" title="Amazing">5 stars</label>
+                            </fieldset>
+
+                        </div>
+
+                        <!-- COMMENT -->
+                        <div class="mb-4">
+                            <label for="comment" class="form-label fw-semibold">Comment</label>
+                            <textarea id="comment" name="review[comment]" class="form-control rounded-4" rows="4"
+                                placeholder="Share your experience..." required></textarea>
+                        </div>
+
+                        <button class="btn btn-primary px-4">
+                            <i class="fa-solid fa-paper-plane"></i> Submit Review
+                        </button>
+
+                    </form>
+                </div>
+            </div>
+            <% } %>
+                <!-- ALL REVIEWS -->
+                <div class="my-5">
+                    <h3 class="fw-bold mb-4">Guest Reviews</h3>
+
+                    <% if (listing.reviews.length===0) { %>
+                        <div class="alert alert-light border rounded-4 shadow-sm text-muted">
+                            No reviews yet. Be the first to review this place.
+                        </div>
+                        <% } else { %>
+
+                            <div class="row g-4">
+                                <% listing.reviews.forEach(review=> { %>
+
+                                    <div class="col-md-6">
+                                        <div class="bg-white p-4 rounded-4 shadow-sm h-100">
+
+                                            <!-- STARS -->
+
+                                            <div class="mb-2">
+                                                <p class="starability-result" data-rating="<%=review.rating %>">
+                                                    Rated: <%=review.rating %> stars
+                                                </p>
+
+                                            </div>
+
+                                            <!-- COMMENT -->
+                                            <p class="text-muted mb-3">
+                                                <%= review.comment %>
+                                            </p>
+
+                                            <!-- FOOTER -->
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <span class="fw-semibold text-secondary">
+                                                    <i class="fa-solid fa-user"></i>
+                                                    <%= review.author.username %>
+                                                </span>
+
+                                                <form
+                                                    action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE"
+                                                    method="POST">
+                                                    <% if (currentUser && review.author._id.equals(currentUser._id)) {
+                                                        %>
+                                                        <button class="btn btn-sm btn-outline-danger">
+                                                            <i class="fa-solid fa-trash"></i>
+                                                        </button>
+                                                        <% } %>
+                                                </form>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <% }) %>
+                            </div>
+
+                            <% } %>
+                </div>
+
+    </div>

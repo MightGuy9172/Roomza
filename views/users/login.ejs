@@ -1,0 +1,56 @@
+<% layout("/layouts/boilerplate") %>
+
+    <div class="container d-flex justify-content-center align-items-center my-5">
+        <div class="col-md-6 col-lg-5">
+
+            <div class="bg-white p-4 p-md-5 rounded-4 shadow-sm">
+
+                <!-- Heading -->
+                <div class="text-center mb-4">
+                    <i class="fa-solid fa-right-to-bracket fa-2x text-primary mb-2"></i>
+                    <h2 class="fw-bold">Welcome Back</h2>
+                    <p class="text-muted">Login to continue to Roomza</p>
+                </div>
+
+                <!-- Login Form -->
+                <form action="/login" method="POST" class="needs-validation" novalidate>
+
+                    <!-- Username -->
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Username</label>
+                        <input type="text" name="username" class="form-control rounded-3"
+                            placeholder="Enter your username" required />
+                        <div class="invalid-feedback">
+                            Username is required.
+                        </div>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold">Password</label>
+                        <input type="password" name="password" class="form-control rounded-3"
+                            placeholder="Enter your password" required />
+                        <div class="invalid-feedback">
+                            Password is required.
+                        </div>
+                    </div>
+
+                    <!-- Button -->
+                    <div class="d-grid">
+                        <button class="btn btn-primary rounded-pill py-2">
+                            <i class="fa-solid fa-right-to-bracket me-1"></i> Login
+                        </button>
+                    </div>
+
+                </form>
+
+                <!-- Footer -->
+                <p class="text-center mt-4 mb-0">
+                    Don’t have an account?
+                    <a href="/signup" class="fw-semibold">Create one</a>
+                </p>
+
+            </div>
+
+        </div>
+    </div>

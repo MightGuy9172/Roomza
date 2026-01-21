@@ -1,0 +1,129 @@
+<% layout("/layouts/boilerplate") %>
+
+    <header class="header">
+        <h1>Find Your Perfect Stay</h1>
+        <p>Handpicked stays across India</p>
+
+        <!-- ✅ CATEGORIES -->
+        <section class="categories container my-4">
+            <div class="d-flex gap-4 flex-wrap justify-content-center">
+
+                <!-- ✅ ALL -->
+                <a href="/listings<%= search ? '?search=' + search : '' %>"
+                    class="cat-item text-center text-decoration-none <%= !category ? 'active-cat' : '' %>">
+                    <div class="cat-icon"><i class="fa-solid fa-border-all"></i></div>
+                    <p class="cat-name">All</p>
+                </a>
+
+                <a href="/listings?category=Trending<%= search ? '&search=' + search : '' %>"
+                    class="cat-item text-center text-decoration-none <%= category === 'Trending' ? 'active-cat' : '' %>">
+                    <div class="cat-icon"><i class="fa-solid fa-fire"></i></div>
+                    <p class="cat-name">Trending</p>
+                </a>
+
+                <a href="/listings?category=Beach<%= search ? '&search=' + search : '' %>"
+                    class="cat-item text-center text-decoration-none <%= category === 'Beach' ? 'active-cat' : '' %>">
+                    <div class="cat-icon"><i class="fa-solid fa-umbrella-beach"></i></div>
+                    <p class="cat-name">Beach</p>
+                </a>
+
+                <a href="/listings?category=Mountains<%= search ? '&search=' + search : '' %>"
+                    class="cat-item text-center text-decoration-none <%= category === 'Mountains' ? 'active-cat' : '' %>">
+                    <div class="cat-icon"><i class="fa-solid fa-mountain"></i></div>
+                    <p class="cat-name">Mountains</p>
+                </a>
+
+                <a href="/listings?category=Farms<%= search ? '&search=' + search : '' %>"
+                    class="cat-item text-center text-decoration-none <%= category === 'Farms' ? 'active-cat' : '' %>">
+                    <div class="cat-icon"><i class="fa-solid fa-tractor"></i></div>
+                    <p class="cat-name">Farms</p>
+                </a>
+
+                <a href="/listings?category=Luxury<%= search ? '&search=' + search : '' %>"
+                    class="cat-item text-center text-decoration-none <%= category === 'Luxury' ? 'active-cat' : '' %>">
+                    <div class="cat-icon"><i class="fa-solid fa-gem"></i></div>
+                    <p class="cat-name">Luxury</p>
+                </a>
+
+                <a href="/listings?category=Camping<%= search ? '&search=' + search : '' %>"
+                    class="cat-item text-center text-decoration-none <%= category === 'Camping' ? 'active-cat' : '' %>">
+                    <div class="cat-icon"><i class="fa-solid fa-campground"></i></div>
+                    <p class="cat-name">Camping</p>
+                </a>
+
+                <a href="/listings?category=Pools<%= search ? '&search=' + search : '' %>"
+                    class="cat-item text-center text-decoration-none <%= category === 'Pools' ? 'active-cat' : '' %>">
+                    <div class="cat-icon"><i class="fa-solid fa-person-swimming"></i></div>
+                    <p class="cat-name">Pools</p>
+                </a>
+
+                <a href="/listings?category=Rooms<%= search ? '&search=' + search : '' %>"
+                    class="cat-item text-center text-decoration-none <%= category === 'Rooms' ? 'active-cat' : '' %>">
+                    <div class="cat-icon"><i class="fa-solid fa-bed"></i></div>
+                    <p class="cat-name">Rooms</p>
+                </a>
+
+            </div>
+        </section>
+
+
+        <!-- ✅ SHOW SELECTED CATEGORY TEXT -->
+        <% if(category || search) { %>
+            <div class="text-center">
+                <span class="badge bg-light text-dark px-3 py-2 rounded-pill">
+                    Showing:
+                    <%= category ? category : "All" %>
+                        <%= search ? " | Search: " + search : "" %>
+                </span>
+            </div>
+            <% } %>
+
+    </header>
+
+    <main class="container">
+        <div class="row g-4">
+
+            <% if(allListings.length===0) { %>
+                <div class="col-12">
+                    <div class="alert alert-light border rounded-4 shadow-sm text-center text-muted">
+                        No listings found in this category.
+                    </div>
+                </div>
+                <% } %>
+
+                    <% allListings.forEach(listing=> { %>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card h-100">
+
+                                <!-- ✅ Safe image -->
+                                <img src="<%= listing.image?.url || 'https://via.placeholder.com/600x400?text=No+Image' %>"
+                                    class="card-img-top"
+                                    onerror="this.src='https://via.placeholder.com/600x400?text=No+Image'">
+
+                                <div class="card-body d-flex flex-column">
+                                    <h5 class="card-title fw-semibold">
+                                        <%= listing.title %>
+                                    </h5>
+
+                                    <p class="location">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                        <%= listing.location %>, <%= listing.country %>
+                                    </p>
+
+                                    <p class="text-muted">
+                                        <%= listing.description.substring(0, 80) %>...
+                                    </p>
+
+                                    <div class="mt-auto d-flex justify-content-between align-items-center">
+                                        <span class="price">
+                                            ₹ <%= listing.price.toLocaleString("en-IN") %> / night
+                                        </span>
+                                        <a href="/listings/<%= listing._id %>" class="btn view-btn">View</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <% }) %>
+
+        </div>
+    </main>

@@ -1,0 +1,84 @@
+<% layout("/layouts/boilerplate") %>
+
+    <header class="header">
+        <h1>Add New Listing</h1>
+        <p>Share your beautiful stay</p>
+    </header>
+
+    <main class="form-container">
+        <form action="/listings" method="POST" class="listing-form needs-validation" novalidate
+            enctype="multipart/form-data">
+
+            <!-- Title -->
+            <div class="form-group mb-3">
+                <label class="form-label">Title</label>
+                <input type="text" name="listing[title]" class="form-control" required>
+                <div class="invalid-feedback">
+                    Title is required.
+                </div>
+            </div>
+
+            <!-- Description -->
+            <div class="form-group mb-3">
+                <label class="form-label">Description</label>
+                <textarea name="listing[description]" class="form-control" rows="4" required></textarea>
+                <div class="invalid-feedback">
+                    Description is required.
+                </div>
+            </div>
+
+            <!-- Category -->
+            <label class="form-label fw-semibold">Category</label>
+            <select name="listing[category]" class="form-select" required>
+                <option value="">Select Category</option>
+                <option value="Beach">Beach</option>
+                <option value="Mountains">Mountains</option>
+                <option value="Farms">Farms</option>
+                <option value="Luxury">Luxury</option>
+                <option value="Camping">Camping</option>
+                <option value="Pools">Pools</option>
+                <option value="Rooms">Rooms</option>
+            </select>
+
+            <!-- Image URL -->
+            <div class="form-group mb-3">
+                <label class="form-label">Upload Image</label>
+                <input type="file" name="listing[image]" class="form-control" required>
+            </div>
+
+            <!-- Price & Location -->
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Price (₹)</label>
+                    <input type="number" name="listing[price]" class="form-control" required>
+                    <div class="invalid-feedback">
+                        Price is required.
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Location</label>
+                    <input type="text" name="listing[location]" class="form-control" required>
+                    <div class="invalid-feedback">
+                        Location is required.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Country -->
+            <div class="form-group mb-4">
+                <label class="form-label">Country</label>
+                <input type="text" name="listing[country]" class="form-control" required>
+                <div class="invalid-feedback">
+                    Country is required.
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="form-actions d-flex gap-2">
+                <a href="/listings" class="btn btn-secondary">Cancel</a>
+                <button type="submit" class="btn btn-primary">Add Listing</button>
+            </div>
+
+        </form>
+    </main>

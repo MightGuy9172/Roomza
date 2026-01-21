@@ -1,0 +1,63 @@
+<% layout("/layouts/boilerplate") %>
+
+    <header class="header edit-header">
+        <h1>Edit Listing</h1>
+    </header>
+
+    <main class="form-container">
+        <form action="/listings/<%= listing._id %>?_method=PUT" method="POST" class="listing-form needs-validation"
+            novalidate enctype="multipart/form-data">
+
+            <!-- Title -->
+            <div class="form-group mb-3">
+                <label class="form-label">Title</label>
+                <input type="text" name="listing[title]" value="<%= listing.title %>" class="form-control" required>
+            </div>
+
+            <!-- Description -->
+            <div class="form-group mb-3">
+                <label class="form-label">Description</label>
+                <textarea name="listing[description]" class="form-control"
+                    required><%= listing.description %></textarea>
+            </div>
+
+            <div class="form-group mb-3">
+                Orignal Image
+                <img src=" <%= orignalListingImage%>" />
+            </div>
+
+            <!-- Image -->
+            <div class="form-group mb-3">
+                <label class="form-label">Upload Image</label>
+                <input type="file" name="listing[image]" class="form-control">
+            </div>
+
+            <!-- Price & Location -->
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Price</label>
+                    <input type="number" name="listing[price]" value="<%= listing.price %>" class="form-control"
+                        required>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Location</label>
+                    <input type="text" name="listing[location]" value="<%= listing.location %>" class="form-control"
+                        required>
+                </div>
+            </div>
+
+            <!-- Country -->
+            <div class="form-group mb-4">
+                <label class="form-label">Country</label>
+                <input type="text" name="listing[country]" value="<%= listing.country %>" class="form-control" required>
+            </div>
+
+            <!-- Buttons -->
+            <div class="form-actions d-flex gap-2">
+                <a href="/listings/<%= listing._id %>" class="btn btn-secondary">Cancel</a>
+                <button type="submit" class="btn btn-success">Update</button>
+            </div>
+
+        </form>
+    </main>
