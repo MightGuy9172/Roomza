@@ -5,8 +5,9 @@ body {
 }
 
 /* ===== NAVBAR ===== */
+/* ===== NAVBAR ===== */
 .navbar {
-  height: 75px;
+  min-height: 75px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
   font-family: "Poppins", sans-serif;
 }
@@ -55,6 +56,64 @@ body {
 
 .navbar .btn-primary:hover {
   opacity: 0.9;
+}
+
+/* ✅ Search placeholder small */
+.search-input::placeholder {
+  font-size: 13px;
+}
+
+/* ✅ Spacing below fixed navbar */
+.nav-space {
+  height: 85px;
+}
+
+/* ✅ MOBILE NAVBAR FIX */
+@media (max-width: 991px) {
+  .navbar {
+    height: auto;
+    padding: 12px 0;
+  }
+
+  .navbar-collapse {
+    background: #fff;
+    padding: 14px;
+    margin-top: 10px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  }
+
+  /* Search full width */
+  .navbar-search {
+    max-width: 100% !important;
+  }
+
+  .navbar-search input {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  /* Links center */
+  .navbar-nav {
+    width: 100%;
+    text-align: center;
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  /* Buttons full width */
+  .navbar .btn {
+    width: 100%;
+  }
+
+  /* remove underline animation on mobile */
+  .nav-link::after {
+    display: none;
+  }
+
+  .nav-space {
+    height: 120px;
+  }
 }
 
 /* ===== HEADER ===== */
@@ -334,37 +393,92 @@ body {
   margin-top: 0;
 }
 
+/* =========================
+   CATEGORIES (DEFAULT)
+========================= */
+
+.categories {
+  padding: 8px 0;
+}
+
 .cat-item {
+  width: 90px; /* ✅ fixed width prevents stretching */
   color: white;
-  padding: 10px 14px;
-  border-radius: 14px;
+  padding: 10px 12px;
+  border-radius: 16px;
   transition: 0.2s ease;
 }
 
 .cat-icon {
   font-size: 22px;
-  margin-bottom: 5px;
+  margin-bottom: 6px;
   color: white;
   transition: 0.2s ease;
 }
 
 .cat-name {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   margin: 0;
   color: white;
   transition: 0.2s ease;
 }
 
-/* Hover: icon + text blue */
+/* Hover */
 .cat-item:hover {
-  background: #f3f4f6;
+  background: #ffffff; /* ✅ white background */
   transform: translateY(-2px);
 }
 
 .cat-item:hover .cat-icon,
 .cat-item:hover .cat-name {
-  color: #0d6efd;
+  color: #0d6efd; /* ✅ blue icon + text */
+}
+
+/* Active category */
+.active-cat {
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+/* =========================
+   MOBILE FIX (IMPORTANT)
+========================= */
+
+@media (max-width: 576px) {
+  .categories .d-flex {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px 6px; /* ✅ smaller gap */
+    justify-items: center;
+    align-items: center;
+  }
+
+  .cat-item {
+    width: 65px; /* ✅ smaller box */
+    padding: 8px 6px; /* ✅ less padding */
+    border-radius: 14px;
+  }
+
+  .cat-icon {
+    font-size: 18px; /* ✅ smaller icon */
+    margin-bottom: 4px;
+  }
+
+  .cat-name {
+    font-size: 11px; /* ✅ smaller text */
+    font-weight: 600;
+  }
+
+  .cat-item:hover {
+    transform: none;
+    background: #ffffff; /* ✅ keep white */
+  }
+
+  .cat-item:hover .cat-icon,
+  .cat-item:hover .cat-name {
+    color: #0d6efd;
+  }
 }
 
 .search-input::placeholder {

@@ -15,18 +15,19 @@
         <!-- Links -->
         <div class="collapse navbar-collapse" id="mainNav">
 
-            <!-- ✅ SEARCH BAR -->
-            <form class="d-flex mx-lg-auto my-3 my-lg-0" action="/listings" method="GET"
-                style="max-width: 420px; width:100%;">
+            <!-- ✅ SEARCH BAR (Responsive) -->
+            <div class="w-100 w-lg-auto d-flex justify-content-center">
+                <form class="d-flex my-3 my-lg-0 w-100 w-lg-auto navbar-search" action="/listings" method="GET">
 
-                <input class="form-control rounded-pill px-4 me-2 search-input" type="search" name="search"
-                    placeholder="Search stays by title / location / country..."
-                    value="<%= (typeof search !== 'undefined') ? search : '' %>" aria-label="Search">
+                    <input class="form-control rounded-pill px-4 me-2 search-input" type="search" name="search"
+                        placeholder="Search stays by title / location / country..."
+                        value="<%= (typeof search !== 'undefined') ? search : '' %>" aria-label="Search">
 
-                <button class="btn btn-primary rounded-pill px-4" type="submit">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </button>
-            </form>
+                    <button class="btn btn-primary rounded-pill px-4" type="submit">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </form>
+            </div>
 
             <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-3">
 
@@ -36,7 +37,6 @@
 
                 <% if (currentUser) { %>
                     <!-- Logged-in user -->
-
                     <li class="nav-item">
                         <a class="btn btn-primary px-4 rounded-pill" href="/listings/new">
                             Add Stay
@@ -49,7 +49,6 @@
 
                     <% } else { %>
                         <!-- Guest user -->
-
                         <li class="nav-item">
                             <a class="nav-link" href="/signup">Signup</a>
                         </li>
@@ -67,5 +66,5 @@
     </div>
 </nav>
 
-<!-- spacing for fixed navbar -->
-<div style="height: 60px;"></div>
+<!-- ✅ spacing for fixed navbar -->
+<div class="nav-space"></div>
